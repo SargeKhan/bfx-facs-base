@@ -17,7 +17,6 @@ class Facility extends EventEmitter {
   }
 
   _getConfPath () {
-    console.log('loading local confPath')
     const cal = this.caller
 
     const fprefix = this.ctx.env
