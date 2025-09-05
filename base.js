@@ -16,19 +16,23 @@ class Facility extends EventEmitter {
     this.ctx = ctx
   }
 
+  _getConfPath () {
+    const cal = this.caller
+
+    const fprefix = this.ctx.env
+    const dirname = path.join(cal.ctx.root, 'config', 'facs')
+
+    let confPath = path.join(dirname, `${this.name}.config.json`)
+    const envConfPath = path.join(dirname, `${fprefix}.${this.name}.config.json`)
+    if (fprefix && fs.existsSync(envConfPath)) {
+      confPath = envConfPath
+    }
+    return confPath
+  }
+
   init () {
     if (this._hasConf) {
-      const cal = this.caller
-
-      const fprefix = this.ctx.env
-      const dirname = path.join(cal.ctx.root, 'config', 'facs')
-
-      let confPath = path.join(dirname, `${this.name}.config.json`)
-      const envConfPath = path.join(dirname, `${fprefix}.${this.name}.config.json`)
-      if (fprefix && fs.existsSync(envConfPath)) {
-        confPath = envConfPath
-      }
-
+      const confPath = this._getConfPath()
       const conf = JSON.parse(fs.readFileSync(confPath, 'utf8'))
       this.conf = conf[this.opts.ns]
     }
