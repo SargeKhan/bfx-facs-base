@@ -1,8 +1,12 @@
 {
-  "name": "bfx-facs-base",
-  "version": "0.0.1",
+  "name": "@bitfinex/bfx-facs-base",
+  "version": "1.0.0",
   "private": false,
-  "description": "Bitfinex Facility",
+  "description": "Bitfinex base facility",
+  "scripts": {
+    "lint": "standard",
+    "lint:fix": "standard --fix"
+  },
   "author": {
     "name": "prdn",
     "email": "paolo@bitfinex.com"
@@ -14,8 +18,11 @@
     "async": "^3.2.1",
     "lodash": "^4.17.21"
   },
-  "engine": {
-    "node": ">=6.0"
+  "devDependencies": {
+    "standard": "^17.1.2"
+  },
+  "engines": {
+    "node": ">=16.0"
   },
   "main": "base.js",
   "license": "Apache-2.0",
@@ -28,6 +35,10 @@
     {
       "name": "prdn",
       "email": "paolo@bitfinex.com"
+    },
+    {
+      "name": "vigan-abd",
+      "email": "vigan.abdurrahmani@bitfinex.com"
     }
   ]
 }
