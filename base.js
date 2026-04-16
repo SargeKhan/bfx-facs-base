@@ -24,25 +24,13 @@ class Facility extends EventEmitter {
 
     const baseJsonPath = path.join(dirname, `${this.name}.config.json`)
     const envJsonPath = path.join(dirname, `${fprefix}.${this.name}.config.json`)
-
-    if (fprefix && fs.existsSync(envJsonPath)) {
-      return envJsonPath
-    }
-    if (fs.existsSync(baseJsonPath)) {
-      return baseJsonPath
-    }
-
     const baseJsPath = path.join(dirname, `${this.name}.config.js`)
     const envJsPath = path.join(dirname, `${fprefix}.${this.name}.config.js`)
 
-    if (fprefix && fs.existsSync(envJsPath)) {
-      return envJsPath
-    }
-    if (fs.existsSync(baseJsPath)) {
-      return baseJsPath
-    }
+    const candidates = [envJsonPath, baseJsonPath, envJsPath, baseJsPath]
+    const confPath = candidates.find(p => fs.existsSync(p)) || baseJsonPath
 
-    return baseJsonPath
+    return confPath
   }
 
   init () {
